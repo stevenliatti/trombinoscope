@@ -1,0 +1,12 @@
+in/*.csv
+in/*.jpg
+out
+thumbs
+photos
+.ammonite
+.metals
+.vscode
+*.aux
+*.log
+*.out
+*.pdf

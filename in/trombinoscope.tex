@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[a4paper, top=1.5cm, right=1.5cm, bottom=1.5cm, left=1.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\graphicspath{ {./thumbs/} }
+
+\begin{document}
+
+\title{Trombinoscope du choeur de l'Université de Genève}
+\author{Le comité du choeur}
+\date{\today}
+\maketitle
+
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{in/director.jpg}
+        @DIRECTOR - Directeur du choeur
+    \end{center}
+    % \caption{légende}
+\end{figure}
+
+\newpage
+
+\input{out/data.tex}
+
+\newpage
+
+\pagebreak
+\hspace{0pt}
+\vfill
+\begin{center}
+    \Large{Généré avec \href{https://www.scala-lang.org/}{Scala}, \href{https://imagemagick.org/}{ImageMagick} et \LaTeX.}
+    \bigbreak
+    \Large{Code source disponible sous \href{https://www.gnu.org/licenses/gpl-3.0.fr.html}{GPLv3} sur \url{https://github.com/stevenliatti/trombinoscope}.}
+\end{center}
+\vfill
+\hspace{0pt}
+\pagebreak
+
+\end{document}
