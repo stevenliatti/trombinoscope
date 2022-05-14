@@ -6,13 +6,15 @@ IMAGES_MARGIN = 0.7
 IMAGE_EXT_FILE = JPEG
 IN_DIR = in
 OUT_DIR = out
-DIRECTOR_NAME = Pierre-Antoine Marçais
+STAFF_1 = Pierre-Antoine Marçais - Directeur du choeur
+STAFF_2 = Borbála Szuromi - Coach vocale
 
 all: convertImages trombinoscope.pdf
 
 trombinoscope.pdf: $(IN_DIR)/trombinoscope.tex $(OUT_DIR)/data.tex
 	cp $< $(OUT_DIR)
-	sed -i 's/@DIRECTOR/$(DIRECTOR_NAME)/g' $(OUT_DIR)/trombinoscope.tex
+	sed -i 's/@STAFF_1/$(STAFF_1)/g' $(OUT_DIR)/trombinoscope.tex
+	sed -i 's/@STAFF_2/$(STAFF_2)/g' $(OUT_DIR)/trombinoscope.tex
 	pdflatex $(OUT_DIR)/trombinoscope.tex
 
 $(OUT_DIR)/data.tex: $(IN_DIR)/choeur-photos.csv
