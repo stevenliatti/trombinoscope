@@ -2,17 +2,18 @@ import scala.io.Source
 import java.io._
 
 object MakeData extends App {
-  val (csvFile, maxChoristPerRow, imagesMargin, imageExtFile, out) =
+  val (csvFile, maxChoristPerRow, maxRowPerPage, imagesMargin, imageExtFile, out) =
     args.toList match {
-      case c :: m :: im :: ie :: out :: _ =>
-        (c, Integer.parseInt(m), im, ie, out)
+      case c :: mc :: mr :: im :: ie :: out :: _ =>
+        (c, Integer.parseInt(mc), Integer.parseInt(mr), im, ie, out)
       case _ =>
         println(
-          "Not enough args, give <csvFile> <maxChoristPerRow> <imagesMargin> <imageExtFile> <out>"
+          "Not enough args, give <csvFile> <maxChoristPerRow> <maxRowPerPage> <imagesMargin> <imageExtFile> <out>"
         )
         sys.exit(1)
     }
 
+  val csvSeparator = ","
   val ratioImageWidth = 0.92 * (1.0 / maxChoristPerRow)
 
   val chorists = Source
@@ -20,7 +21,7 @@ object MakeData extends App {
     .getLines
     .toList
     .tail
-    .map(l => l.split(",").toList)
+    .map(l => l.split(csvSeparator).toList)
     .map(a =>
       a match {
         case l :: n :: no :: v :: Nil if no.nonEmpty && v.nonEmpty =>
@@ -61,8 +62,8 @@ object MakeData extends App {
     }
   }
   case class ChoristsRow(chorists: List[Chorist]) extends ToLatex {
-    val rows: List[List[Chorist]] = toTuples(chorists).filter(_.nonEmpty)
-    val pages: List[List[List[Chorist]]] = toTuples(rows)
+    val rows: List[List[Chorist]] = toTuples(chorists, maxChoristPerRow).filter(_.nonEmpty)
+    val pages: List[List[List[Chorist]]] = toTuples(rows, maxRowPerPage)
 
     override def toLatex: String = pages
       .map(rows =>
@@ -78,9 +79,9 @@ object MakeData extends App {
       )
       .mkString("\\newpage\n")
 
-    private def toTuples[T](cs: List[T]): List[List[T]] = cs match {
+    private def toTuples[T](cs: List[T], max: Int): List[List[T]] = cs match {
       case Nil => List(Nil)
-      case _ => cs.take(maxChoristPerRow) :: toTuples(cs.drop(maxChoristPerRow))
+      case _ => cs.take(max) :: toTuples(cs.drop(max), max)
     }
   }
 

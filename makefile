@@ -2,6 +2,7 @@ INPUT_PHOTOS_DIR = photos
 THUMBS_WIDTH = 200
 THUMBS_DIR = thumbs
 MAX_CHORIST_PER_ROW = 4
+MAX_ROW_PER_PAGE = 3
 IMAGES_MARGIN = 0.7
 IMAGE_EXT_FILE = JPEG
 IN_DIR = in
@@ -19,7 +20,7 @@ trombinoscope.pdf: $(IN_DIR)/trombinoscope.tex $(OUT_DIR)/data.tex
 
 $(OUT_DIR)/data.tex: $(IN_DIR)/choeur-photos.csv
 	mkdir -p $(OUT_DIR)
-	scala src/MakeData.scala $< $(MAX_CHORIST_PER_ROW) $(IMAGES_MARGIN) $(IMAGE_EXT_FILE) $@
+	scala src/MakeData.scala $< $(MAX_CHORIST_PER_ROW) $(MAX_ROW_PER_PAGE) $(IMAGES_MARGIN) $(IMAGE_EXT_FILE) $@
 
 convertImages:
 	scala src/ConvertImages.scala $(INPUT_PHOTOS_DIR) $(THUMBS_DIR) $(THUMBS_WIDTH)
