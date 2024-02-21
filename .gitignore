@@ -5,6 +5,8 @@ thumbs
 photos
 .ammonite
 .metals
+.bsp
+.scala-build
 .vscode
 *.aux
 *.log

@@ -1,8 +1,15 @@
-import scala.io.Source
 import java.io._
+import scala.io.Source
 
 object MakeData extends App {
-  val (csvFile, maxChoristPerRow, maxRowPerPage, imagesMargin, imageExtFile, out) =
+  val (
+    csvFile,
+    maxChoristPerRow,
+    maxRowPerPage,
+    imagesMargin,
+    imageExtFile,
+    out
+  ) =
     args.toList match {
       case c :: mc :: mr :: im :: ie :: out :: _ =>
         (c, Integer.parseInt(mc), Integer.parseInt(mr), im, ie, out)
@@ -24,7 +31,7 @@ object MakeData extends App {
     .map(l => l.split(csvSeparator).toList)
     .map(a =>
       a match {
-        case l :: n :: no :: v :: Nil if no.nonEmpty && v.nonEmpty =>
+        case l :: n :: no :: v :: _ if no.nonEmpty && v.nonEmpty =>
           Some(Chorist(l, n, no, v))
         case _ => None
       }
@@ -62,7 +69,8 @@ object MakeData extends App {
     }
   }
   case class ChoristsRow(chorists: List[Chorist]) extends ToLatex {
-    val rows: List[List[Chorist]] = toTuples(chorists, maxChoristPerRow).filter(_.nonEmpty)
+    val rows: List[List[Chorist]] =
+      toTuples(chorists, maxChoristPerRow).filter(_.nonEmpty)
     val pages: List[List[List[Chorist]]] = toTuples(rows, maxRowPerPage)
 
     override def toLatex: String = pages
@@ -81,7 +89,7 @@ object MakeData extends App {
 
     private def toTuples[T](cs: List[T], max: Int): List[List[T]] = cs match {
       case Nil => List(Nil)
-      case _ => cs.take(max) :: toTuples(cs.drop(max), max)
+      case _   => cs.take(max) :: toTuples(cs.drop(max), max)
     }
   }
 
