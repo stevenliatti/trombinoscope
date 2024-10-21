@@ -7,7 +7,7 @@ IMAGES_MARGIN = 0.7
 IMAGE_EXT_FILE = JPEG
 IN_DIR = in
 OUT_DIR = out
-STAFF_1 = Pierre-Antoine Marçais - Directeur du choeur
+STAFF_1 = Léonie Cachelin - Directrice du choeur
 STAFF_2 = Borbála Szuromi - Coach vocale
 
 all: convertImages trombinoscope.pdf
