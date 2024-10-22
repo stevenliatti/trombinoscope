@@ -41,14 +41,10 @@ object MakeData extends App {
     .groupBy(_.voice)
 
   val dataTex = List(
-    "soprano 1",
-    "soprano 2",
-    "alto 1",
-    "alto 2",
-    "ténor 1",
-    "ténor 2",
-    "basse 1",
-    "basse 2"
+    "soprano",
+    "alto",
+    "ténor",
+    "basse"
   ) map (v => toLatex(v, chorists.getOrElse(v, Nil)))
   writeFile(out, dataTex)
 
