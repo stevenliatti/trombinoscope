@@ -4,7 +4,7 @@ THUMBS_DIR = thumbs
 MAX_CHORIST_PER_ROW = 4
 MAX_ROW_PER_PAGE = 3
 IMAGES_MARGIN = 0.7
-IMAGE_EXT_FILE = JPEG
+IMAGE_EXT_FILE = jpg
 IN_DIR = in
 OUT_DIR = out
 STAFF_1 = Léonie Cachelin - Directrice du choeur
@@ -26,9 +26,9 @@ convertImages:
 	scala src/ConvertImages.scala $(INPUT_PHOTOS_DIR) $(THUMBS_DIR) $(THUMBS_WIDTH)
 
 mostlyclean:
-	rm -rf *.aux *.log
+	rm -rf *.aux *.log *.out
 
 clean: mostlyclean
-	rm -rf $(OUT_DIR) $(THUMBS_DIR)
+	rm -rf $(OUT_DIR) $(THUMBS_DIR) trombinoscope.pdf
 
 .PHONY: $(OUT_DIR)/data.tex mostlyclean clean

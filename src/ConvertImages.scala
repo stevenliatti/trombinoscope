@@ -5,20 +5,17 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import scala.language.postfixOps
 
-import sys.process._
+import sys.process.*
 
-object ConvertImages extends App {
-  val (srcDir, destDir, imgWidthPixels) = args.toList match {
-    case s :: d :: im :: _ => (s, d, im)
-    case _ =>
-      println("Not enough args, give <srcDir> <destDir> <imgWidthPixels>")
-      sys.exit(1)
-  }
-
+@main def convertImages(
+    srcDir: String,
+    destDir: String,
+    imgWidthPixels: String
+) =
   val dest = new File(destDir)
   if (!dest.exists) dest.mkdir
 
-  filesIn(srcDir) match {
+  filesIn(srcDir) match
     case Some(files) =>
       files.sorted.zipWithIndex.foreach { case (f, i) =>
         val ext = f.getName.split("\\.").last
@@ -28,11 +25,8 @@ object ConvertImages extends App {
     case None =>
       println("srcDir not present")
       sys.exit(1)
-  }
 
-  def filesIn(dir: String): Option[List[File]] = {
-    val d = new File(dir)
-    if (d.exists && d.isDirectory) Some(d.listFiles.filter(_.isFile).toList)
-    else None
-  }
-}
+def filesIn(dir: String): Option[List[File]] =
+  val d = new File(dir)
+  if (d.exists && d.isDirectory) Some(d.listFiles.filter(_.isFile).toList)
+  else None

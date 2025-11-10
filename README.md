@@ -8,12 +8,12 @@ Put in the directory `in` a CSV file (separated by a comma `,`) with the followi
 
 ```csv
 lastname,name,no,voice
-Smith,Mary,12,alto 1
+Smith,Mary,12,alto
 ```
 
 Put in the directory `photos` your photos in the corresponding order in the CSV file (aka the `no` field).
 
-A first program rename the images files (example: `IMG_123.JPEG -> 1.JPEG`) and convert it with imagemagick to reduce his size.
+A first program rename the images files (example: `IMG_123.jpg -> 1.jpg`) and convert it with imagemagick to reduce his size.
 
 A second program read the CSV file and make a `.tex` file to compile with LaTeX.
 
@@ -21,14 +21,16 @@ A `makefile` is present to help through the different steps. It also define some
 
 ## Dependencies
 
-The workflow is run on GNU/Linus OS.
+The workflow is run on GNU/Linux OS. You will need [Scala](https://scala-lang.org/) (and possibly Java).
 
-Scala 2.13.8 (via sdkman): 
+Scala 3.3.4 (via sdkman):
 
 ```bash
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install scala 2.13.8
+# If you need Java, for example 21 version
+# sdk install java 21.0.8-tem
+sdk install scala 3.3.4
 ```
 
 Other dependencies (on Debian/Ubuntu based) :
